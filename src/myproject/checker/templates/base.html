@@ -1,0 +1,92 @@
+{% load static %}
+{% load add_attr %}
+{% load imagekit %}
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>The Checker</title>
+
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"></script>
+        <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="{% static 'css/upload.css' %}">
+        <link rel="stylesheet" href="{% static 'css/loader.css' %}">
+        <link rel="stylesheet" href="{% static 'css/styles/default.css' %}">
+        <script src="{% static 'js/highlight.pack.js' %}"></script>
+        <script> hljs.initHighlightingOnLoad();</script>
+
+    </head>
+
+    <body style="margin-bottom:50px">
+        <!-- Modal -->
+        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Are you sure?</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                </div>
+                <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" style="font-size: 16px" data-dismiss="modal"> Close</button>
+                <a href="/checker/accounts/logout/"> <button type="button" style="font-size: 16px" class="btn btn-primary"> Logout </button></a>
+                </div>
+            </div>
+            </div>
+        </div>
+
+
+        <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #a7d2f8;">
+    
+            <a class="navbar-brand" href="/checker"> <img src="/static/img/logo.png" width="40" height="40"> </a>
+
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarDropdown" aria-controls="navbarDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+
+            <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+                <div class="navbar-nav">
+                    <a class="nav-item nav-link active px-3" href="/checker/problem"> <b>Problems</b> <span class="sr-only">(current)</span></a>
+                    <a class="nav-item nav-link active px-3" href="/checker/upload"> <b>Upload</b></a>
+                    <a class="nav-item nav-link active px-3" href="/checker/sources"> <b>Submissions</b></a>
+                </div>
+            </div>
+
+   
+            <ul class="nav navbar-nav ml-auto">
+                {% if user.is_anonymous %}
+                    <a class="nav-item nav-link active px-3" href="/checker/accounts/login"> <b> Login </b></a>
+                {% else %}
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle active px-3" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <b> Account profile </b>
+                        </a>
+
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item menu-link-blue mb-3" href="#"> <span> Coins: {{ user.profile.coins }} <img width="20px" height="20px" style="margin-bottom: 5px;" src="/static/img/coin.png"/> </span> </a>
+                            
+                            <a class="dropdown-item menu-link-blue" href="/checker/accounts/profile"> <span> Profile </span> </a>
+                            <div class="progress mx-3">
+                            <div class="progress-bar" role="progressbar" style="width: {{percentage_solved}}%" aria-valuenow="{{percentage_solved}}" aria-valuemin="0" aria-valuemax="100"></div>
+                            </div>
+                            <div class="dropdown-divider"></div>
+                            <button class="dropdown-item menu-link-red" style="color: red" data-toggle="modal" data-target="#exampleModal"> <span> Logout </span> </button>
+                        </div>
+                    </li>
+                {% endif %}
+            </ul>
+
+        </nav>
+
+        {% block content %}
+        {% endblock %}
+
+    </body>
+
+</html>    

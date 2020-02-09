@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+{% load add_attr %}
+
+{% block content %}
+
+  {% if form.errors %}
+  <div class="error-tip" style="margin-top:5px">
+      {% for error in form.errors %}
+      <p>{{ error }}</p>
+      {% endfor %}
+  </div>
+  {% endif %}
+  
+  
+  <form method="post" action="{% url 'login' %}">
+    {% csrf_token %}
+    <div class="container">
+      <div class="row my-3 mx-5 my-4">
+        <b> Log into your account </b>
+      </div>
+      <div class="row my-3">
+        <div class="col-lg-1 mx-1">{{ form.username.label_tag }}</div>
+        <div class="col-lg-5">{{ form.username|add_attr:'class:form-control'}}</div>
+      </div>
+      <div class="row">
+        <div class="col-lg-1 mx-1">{{ form.password.label_tag }}</div>
+        <div class="col-lg-5">{{ form.password|add_attr:'class:form-control' }}</div>
+      </div>
+      
+      <div class="row my-5">
+        <div class="col-lg-1 mx-1"></div>
+        <div class="col-lg-5">
+          <div class="upload-btn-wrapper">
+            <button class="btn">Login</button>
+            <input display="none" type="submit" value="login"/>
+          </div>
+        </div>
+      </div>
+      <div class="row my-5">
+          <div class="col-md">
+            {# Assumes you setup the password_reset view in your URLconf #}
+            <p><a href="{% url 'password_reset' %}">Forgot password?</a></p>
+          </div>
+
+          <div class="col-md">
+              <p>Don't have an account? <a href="{% url 'register' %}"> Register</a></p>
+            </div>
+      </div>
+    </div>
+    <input type="hidden" name="next" value="{{ next }}" />
+  </form>
+  
+
+  
+{% endblock %}

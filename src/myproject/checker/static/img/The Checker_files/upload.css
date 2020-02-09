@@ -1,0 +1,38 @@
+.upload-btn-wrapper {
+    position: relative;
+    overflow: hidden;
+    display: inline-block;
+  }
+  
+  .btn {
+    border: 2px solid #3498db;
+    color: white;
+    background-color: #3498db;
+    padding: 8px 20px;
+    border-radius: 8px;
+    font-size: 20px;
+    font-weight: bold;
+  }
+  
+  .upload-btn-wrapper input {
+    font-size: 100px;
+    position: absolute;
+    left: 0;
+    top: 0;
+    opacity: 0;
+  }
+
+  body {
+      background: url(/static/img/background.jpg);
+  }
+
+
+table.spec-border{
+    border:1px solid ;
+}
+table.spec-border > thead > tr > th{
+    border:1px solid ;
+}
+table.spec-border > tbody > tr > td{
+    border:1px solid ;
+}

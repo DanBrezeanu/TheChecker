@@ -1,0 +1,6 @@
+---
+name: a + b
+time_limit: 0.1
+mem_limit: 64
+source_limit: 5
+difficulty: 1

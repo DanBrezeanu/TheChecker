@@ -1,0 +1,8 @@
+{
+    "Enunt": "Se dau doua numere intregi <b> a </b> si <b> b </b>. Sa se calculeze suma numerelor.",
+    "Cerinta": "Cunoscand <b> a </b> si <b> b </b>, sa se calculeze suma lor.",
+    "Date de intrare": "Fisierul 0.in contine pe prima linie numarul intreg <b> a </b>, iar pe cea de a doua line numarul intreg <b> b </b>.",
+    "Date de iesire": "Fisierul 0.out va contine o singura linie pe care se va afla suma celor doua numere.",
+    "Restrictii": "<li> -2.000.000.000 &lt; a, b &lt; 2.000.000.000 </li>",
+    "Exemple": ""
+}

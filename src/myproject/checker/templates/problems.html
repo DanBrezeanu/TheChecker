@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<table class="table table-striped table-bordered">
+    <thead>
+        <tr>
+            <th scope="col" style="width: 10%"> Number </th>
+            <th scope="col" style="width: 20%"> Title </th>
+            <th scope="col" style="width: 20%"> Difficulty </th>
+            <th scope="col" style="width: 20%"> Score </th>
+            <th scope="col" style="width: 25%"> Solved </th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for entry, score in entries %}
+        <tr>
+        
+            <td scope="row"  style="padding-left:30px">  {{ entry.number }} </td>
+            
+            <td> <strong> <a href="/checker/problem/{{entry.number}}/"> {{ entry.name }} </a>  </strong> </td>
+            
+            <td> 
+                {% for i in '12345'|make_list %}
+                    {% if forloop.counter0 < entry.difficulty %}
+                        <span class='bluedot'> </span>
+                    {% else %}
+                        <span class='dot'> </span>
+                    {% endif %}
+                {% endfor %}
+            </td> 
+            
+            <td> 
+            {% if score != -1 %}
+                {{ score }}
+            {% else %}
+                <div style="font-size: 13px; color: gray"> N/A </div>
+            {% endif %}
+            </td> 
+
+            <td>
+                {% if score == 100 %}
+                    <div style="color:green; font-size:20px;"> &#10004; </div>
+                {% else %} {% if score != -1 %}    
+                    <div style="font-size:15px;"> &#10060; </div>                    
+                    {% endif %}
+                {% endif %}
+            </td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+
+
+{% endblock %}

@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+{% load add_attr %}
+
+
+{% block content %}
+
+    <div class="container">
+    <!-- Upload form. Note enctype attribute! -->
+        <form action="{% url 'list' %}" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <p>{{ form.non_field_errors }}</p>
+            
+
+            <div class="row my-4">
+                <div class="col-md-2">
+                    {{ form.problemnumber.label_tag }} {{ form.problemnumber.help_text }}
+                </div>
+                <div class="col-md-2">
+                    {{ form.problemnumber.errors }}
+                    {{ form.problemnumber }}
+                </div>
+            </div>
+        
+            <div class="row my-4">
+                <div class="col-md">        
+                    <div class="custom-file">
+                        {{ form.docfile.errors }}
+                        {{ form.docfile|add_attr:'class:custom-file-input'}}
+                        <label class="custom-file-label" for="customFile">Choose file</label> 
+                    </div>
+                </div>
+                <div class="col-md"></div>
+            </div>
+
+            <div class="row">
+                <div class="col-md">
+                    <div class="upload-btn-wrapper">
+                        <button class="btn">Upload</button>
+                        <input display="none" type="submit" value="Upload"/>
+                    </div>
+                </div>
+            </div>
+        </form>
+
+        <script>
+                $(".custom-file-input").on("change", function() {
+                    var fileName = $(this).val().split("\\").pop();
+                    $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+                });
+        </script>
+    </div>
+{% endblock %}

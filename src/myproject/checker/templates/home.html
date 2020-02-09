@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block content %}
+ General purpose problem uploading and checker. </br>
+
+ For any issues
+
+ <a id="send_mail" href="#" target="_top"> send </a>
+
+
+ a mail with a detailed description.
+ 
+ <script>
+        document.getElementById("send_mail").href = "mailto:dan.brezeanu1@gmail.com?Subject=[Checker]%20Issue%20Checker " + Date();
+</script>
+
+
+{% if user.is_authenticated %}
+<li>User: {% if user.get_username == 'dan' %}
+        ok
+        {% else %}
+        not ok
+        {% endif %}
+</li>
+{% endif %}
+
+{% endblock %}

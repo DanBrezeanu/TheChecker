@@ -1,0 +1,92 @@
+{% extends 'base.html' %}
+{% load add_attr %}
+
+
+{% block content %}
+    <div class="container-fluid" style="margin-left: 20px; font-family: Tahoma, Geneva, sans-serif;" >
+    
+        <div class="row my-2" >
+            <div class="col-lg-3"> 
+                <h2 style="margin-top: 12px;"> Problema {{ entry.number }} </h2>
+            </div>
+
+            <div class="col-lg-3">
+                <div class="container">
+                    <div class="row my-1">
+                        <div class="col-lg-7">
+                           <b>  Memory limit: {{ entry.memory_limit }} MB </b>
+                        </div>
+                    </div>
+                    <div class="row my-1">
+                        <div class="col-lg-6">
+                            <b>  Time limit: {{ entry.time_limit }} s </b>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-2">
+                    Best Score: 
+                    {% if bestsource != None %}
+                    <a href="/checker/{{bestsource.docfile}}/"> {{ bestsource.score }} </a>
+                    {% else %}
+                    <p style="font-size: 13px; color: gray"> N/A </p> 
+                    {% endif %}
+            </div>
+            
+            <div class="col-lg-auto">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-auto my-1">
+                            {% if bestsource.score == 100 %}
+                            <a href="official_solution"> See official solution </a>
+                            {% else %}
+                            <a href="/checker/upload"> Upload solution </a>
+                            {% endif %} 
+                        </div>
+                    </div>
+                    <div class="row my-1">
+                            <div class="col-lg-auto">
+                                <a href="submissions"> Sent submissions </a>
+                            </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <hr>
+        
+
+        {% autoescape off %}
+        {{ entry.text }}
+        {% endautoescape %}
+
+    </div>
+
+    <div class="container" style="margin-left: 20px; font-family: Tahoma, Geneva, sans-serif;">
+        <div class="row">
+            <div class="col-md-9">
+                <table class="table table-striped table-bordered spec-border" style="border: 3px">
+                    <thead>
+                        <tr> 
+                            <th scope="col" style="width: 20%"> {{entry.number}}.in </th>
+                            <th scope="col" style="width: 20%"> {{entry.number}}.out </th>
+                            <th scope="col" style="width: 20%"> Observatii </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for ex in examples %}
+                        <tr>
+                            {% for field in ex %}
+                            <td> <pre style="margin-left:10px">{{ field }}</pre> </td>
+                            {% endfor %}
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+   
+{% endblock %}
+
