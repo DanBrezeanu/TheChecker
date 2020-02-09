@@ -1,27 +1,98 @@
 {% extends 'base.html' %}
 
 {% block content %}
- General purpose problem uploading and checker. </br>
 
- For any issues
+ <div class="container-fluid">
+        <div class="row my-2 mx-3" style="font-family: Tahoma, Geneva, sans-serif; font-size:20px">
+                        <div class="col-lg-9">
+                                General purpose problem uploading and checker. 
+                        </div>
+                </div>
+        <hr>
 
- <a id="send_mail" href="#" target="_top"> send </a>
+        <div class="row my-2 mx-3" style="font-family: Tahoma, Geneva, sans-serif; font-size:20px">
+               <div class="col-lg-9">
+                        <b> How to upload? </b>
+               </div>   
+        </div>
+        
+        {% if user.is_anonymous %}
+        <div class="row my-2 mx-3" style="font-family: Tahoma, Geneva, sans-serif; font-size:17px">
+                <div class="col-lg-auto">
+                       To upload a problem you must first <a href="/checker/accounts/login"> login </a> or <a href="/checker/accounts/register"> register </a>
+                </div>  
+        </div>
+        {% endif %}
+
+        <div class="row my-2 mx-3" style="font-family: Tahoma, Geneva, sans-serif; font-size:17px">
+                <div class="col-lg-auto">
+                        The solution for every problem must be written into the specified file. The input (according to the problem's text) must be read from the specified input file.
+                </div>  
+        </div>
+
+        <div class="row my-2 mx-3" style="font-family: Tahoma, Geneva, sans-serif; font-size:17px">
+                <div class="col-lg-auto">
+                        <button class="btn btn-info btn-sm" type="button" data-toggle="collapse" data-target="#cplusplus" aria-expanded="false" aria-controls="cplusplus" style="margin:10px; font-size:15px;">
+                                <b>C++</b>
+                        </button>
+
+                        <div class="collapse" id="cplusplus">
+                                <div class="card card-body">    
+                                        <pre> <code class="cpp">
+#include &lt;fstream&gt;
+
+int main(int argc, char* argv[]) {
+   ifstream in("x.in");    // read from file x.in
+   ofstream out("x.out");  // write to file x.out
+
+   in >> a;
+   out << a;
+
+   return 0;
+}
+                                                                                        
+                                        </code></pre>
+                                </div>
+                        </div>
+                </div>
+
+        
+                <div class="col-lg-auto">
+                        <button class="btn btn-info btn-sm" type="button" data-toggle="collapse" data-target="#c" aria-expanded="false" aria-controls="c" style="margin:10px; font-size:15px; ">
+                                <b>C</b>
+                        </button>
+
+                        <div class="collapse" id="c">
+                                <div class="card card-body">    
+                                        <pre> <code class="c">
+#include &lt;stdio.h&gt;
+
+int main(int argc, char* argv[]) {
+   FILE *fi = fopen("x.in", "r");   // read from file x.in
+   FILE *fo = fopen("x.out", "w");  // write to file x.out
+
+   fscanf(fi, "%d", &a);
+   fprintf(fo, "%d\n", a);
+
+   return 0;
+}
+                                                                                        
+                                        </code></pre>
+                                </div>
+                        </div>
+                </div>
+        </div>
 
 
- a mail with a detailed description.
  
+ 
+<div class="row my-2 mx-3" style="font-family: Tahoma, Geneva, sans-serif; font-size:14px">
+ For any issues  &nbsp; <a id="send_mail" href="#" target="_top">send</a> &nbsp; a mail with a detailed description.
+</div>
+
+ </div>
  <script>
         document.getElementById("send_mail").href = "mailto:dan.brezeanu1@gmail.com?Subject=[Checker]%20Issue%20Checker " + Date();
 </script>
-
-
-{% if user.is_authenticated %}
-<li>User: {% if user.get_username == 'dan' %}
-        ok
-        {% else %}
-        not ok
-        {% endif %}
-</li>
-{% endif %}
 
 {% endblock %}
