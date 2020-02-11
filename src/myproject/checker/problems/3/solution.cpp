@@ -49,6 +49,7 @@ int main(int argc, char* argv[]) {
     for (int i = 0; i < n_even; ++i) {
         out << even[i] << " ";
     }
+    out << "\n";
 
     for (int i = 0; i < n_odd; ++i) {
         out << odd[i] << " ";
