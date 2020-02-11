@@ -120,7 +120,7 @@ def rawfile(request, id = 0, filename = 'NULL'):
         return render(request, 'permission_denied.html')
 
 def list_problems(request):
-    entries = Problem.objects.all()
+    entries = Problem.objects.all()[::-1]
     problem_scores = [-1 for i in range(len(entries))]
 
     if not request.user.is_anonymous:

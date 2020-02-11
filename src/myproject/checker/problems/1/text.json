@@ -1,0 +1,8 @@
+{
+    "Enunt": "Se dau numere pana la intalnirea numarului 0. Sa se calculeze cel mai mic si cel mai mare numar dat.",
+    "Cerinta": "Cunoscand numerele date, sa se calculeze minimul si maximul.",
+    "Date de intrare": "Fisierul 1.in contine pe fiecare linie cate un numar, iar pe ultima linie se afla numarul 0.",
+    "Date de iesire": "Fisierul 1.out va contine pe prima linie cel mai mic numar dintre cele date, iar pe a doua linie, cel mai mare numar.",
+    "Restrictii": "<li> -2.000.000.000 &lt; n &lt; 2.000.000.000 </li>",
+    "Exemple": ""
+}

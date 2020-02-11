@@ -1,0 +1,8 @@
+{
+    "Enunt": "Se dau numere pana la intalnirea numarului 0. Sa se calculeze media aritmetica a numerelor pare.",
+    "Cerinta": "Cunoscand numerele, sa se calculeze media artimetica a numerelor pare. Ultimul numar (0) nu trebuie luat in considerare.",
+    "Date de intrare": "Fisierul 2.in contine pe prima linie toate numere, ultimul fiind numarul 0.",
+    "Date de iesire": "Fisierul 2.out va contine o singura linie pe care se va afla media artimetica ceruta, <b> cu 2 zecimale exacte </b>.",
+    "Restrictii": "<li> 0 &lt; n &lt; 2.000.000.000 </li> \n <li> <i> Pentru afisarea cu 2 zecimale exacte se va folosi urmatoarea sintaxa </i> \n <pre> <code class=\"cpp\"> #include &lt;iomanip> \n cout << fixed << setprecision(2) << n; \n </code> </pre> </li> \n <li> Daca nu exista niciun numar par, se va afisa -1 </li>",
+    "Exemple": ""
+}

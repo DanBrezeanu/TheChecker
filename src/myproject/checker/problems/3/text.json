@@ -1,0 +1,9 @@
+{
+    "Enunt": "<p> Programatorii de la Google Maps au amestecat numerele caselor de pe Strada Panselutelor. </p> \n \
+              <p> Ei ne cer ajutorul nostru pentru a rezolva aceasta incurcatura. Strada Panselutelor, ca orice alta strada, are numere pare pe o parte, iar cele impare pe cealalta parte. Numerele pare incep de la cele mici, iar cele impare incep de la cele mari. </p> <p> Programatorii de la Google ne dau numarul caselor <b>n</b>, si apoi <b>n</b> numere intregi pozitive, reprezentand numerele caselor de pe strada. </p> <p> Sarcina noastra este sa le dam inapoi numerele in ordinea corecta. </p>",
+    "Cerinta": "Cunoscandu-se numarul de case <b>n</b> si numerele acestora, sa se determine ordinea corecta a caselor.",
+    "Date de intrare": "Fisierul 3.in contine pe prima linie numarul <b>n</b>, iar pe ce-a dea doua linie toate numerele caselor, in ordinea amestecata.",
+    "Date de iesire": "Fisierul 3.out va contine pe prima linie numerele pare, iar pe cea de-a doua cele impare, in ordinea corecta.",
+    "Restrictii": "<li> 0 &lt; n &gt; 100.000 </li>\n<li> 0 &lt; numar casa &gt; 1.000.000 </li>",
+    "Exemple": ""
+}
