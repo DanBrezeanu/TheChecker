@@ -12,7 +12,7 @@ void bubble_sort(int v[], int n, bool ascending) {
                 int aux = v[i];
                 v[i] = v[j];
                 v[j] = aux;
-            } else if (v[i] < v[j]) {
+            } else if (!ascending && v[i] < v[j]) {
                 int aux = v[i];
                 v[i] = v[j];
                 v[j] = aux;
