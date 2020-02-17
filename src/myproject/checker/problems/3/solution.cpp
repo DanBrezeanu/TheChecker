@@ -12,7 +12,7 @@ void bubble_sort(int v[], int n, bool ascending) {
                 int aux = v[i];
                 v[i] = v[j];
                 v[j] = aux;
-            } else if (v[i] < v[j]) {
+            } else if (!ascending && v[i] < v[j]) {
                 int aux = v[i];
                 v[i] = v[j];
                 v[j] = aux;
@@ -49,6 +49,7 @@ int main(int argc, char* argv[]) {
     for (int i = 0; i < n_even; ++i) {
         out << even[i] << " ";
     }
+    out << "\n";
 
     for (int i = 0; i < n_odd; ++i) {
         out << odd[i] << " ";
