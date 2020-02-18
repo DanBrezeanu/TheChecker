@@ -33,8 +33,6 @@ class Problem(models.Model):
     id = models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')
     number = models.IntegerField(null=False)
     name = models.CharField(null=False, default='', max_length=100)
-    solved = models.BooleanField(null=False, default=False)
-    bestscore = models.IntegerField(null=False, default=0)
     coins_awarded = models.IntegerField(null=False, default=0)
     text = models.CharField(null=False, default='', max_length=10000)
     examples = models.CharField(null=False, default = '', max_length=100000)
@@ -47,9 +45,8 @@ class Problem(models.Model):
 
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    problems_solved = models.ManyToManyField(to='checker.Problem', related_name='solvd')
-    problems_tried = models.ManyToManyField(to='checker.Problem')
-    sent_sources = models.ManyToManyField(to='checker.Document')
+    problems = models.ManyToManyField(to='checker.Problem')
+    sources = models.ManyToManyField(to='checker.Document')
     coins = models.IntegerField(null=False, default=0)
     image = ProcessedImageField(upload_to='img', null=True, default='placeholder.png', processors=[ResizeToFill(200,200)])
 

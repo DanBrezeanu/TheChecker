@@ -39,7 +39,6 @@ def file_upload(request, dateandtime):
     return default_storage.path(path)
 
 def upload(request):
-    open('/home/pi/checker/src/myproject/celemailoguri.txt', 'w').write('in upload\n')
     if request.user.is_anonymous:
         return HttpResponseRedirect(reverse('login'))
     else:
@@ -58,11 +57,9 @@ def upload(request):
                         )
                 newdoc.save()
                 
-                request.user.profile.sent_sources.add(newdoc)
+                request.user.profile.sources.add(newdoc)
                 Problem.objects.filter(number = int(request.POST['problemnumber'][0]))[0].sources.add(newdoc)
                 fname = format_name(request, dateandtime)
-                print(fname)
-                open('/home/pi/checker/src/myproject/celemailoguri.txt', 'a').write('starting thread\n')
                 threading.Thread(target=evaluate_source, args=(fname, request.user), kwargs={}).start()
 
                 # Redirect to the document list after POST
@@ -100,7 +97,7 @@ def sources(request):
     if request.user.is_anonymous:
         return HttpResponseRedirect(reverse('login'))
     else:
-        documents = request.user.profile.sent_sources.all()[::-1]
+        documents = request.user.profile.sources.all()[::-1]
         
         difficulties = [doc.problemobj.difficulty for doc in documents][::-1]
 
@@ -112,7 +109,7 @@ def rawfile(request, id = 0, filename = 'NULL'):
     if request.user.is_anonymous:
         return HttpResponseRedirect(reverse('login'))
 
-    has_permission = any([source.docfile.split('/')[-1] == filename for source in request.user.profile.sent_sources.all()])
+    has_permission = any([source.docfile.split('/')[-1] == filename for source in request.user.profile.sources.all()])
     if has_permission:
         # filecontent = syntax_highlight(open(os.path.join(settings.MEDIA_ROOT, str(id), filename)).read())
         return render(request, 'rawfile.html', {'filecontent': open(os.path.join(settings.MEDIA_ROOT, str(id), filename)).read()})
@@ -126,7 +123,7 @@ def list_problems(request):
     if not request.user.is_anonymous:
         user = User.objects.get(username = request.user.username)
 
-        for source in user.profile.sent_sources.all():
+        for source in user.profile.sources.all():
             if source.score > problem_scores[source.problemobj.number]:
                 problem_scores[source.problemobj.number] = source.score
 
@@ -140,7 +137,7 @@ def problem(request, id = 0):
     max_score = -1
 
     if not request.user.is_anonymous:
-        for source in request.user.profile.sent_sources.all():
+        for source in request.user.profile.sources.all():
             if source.problemobj.number == id and source.score > max_score:
                 bestsource = source
                 max_score = source.score
@@ -167,7 +164,7 @@ def official_solution(request, id = 0):
     if request.user.is_anonymous:
         return render(request, 'permission_denied.html')
 
-    if id not in [pb.number for pb in request.user.profile.problems_solved.all()]:
+    if not any(src.problemobj.number == id and src.score == 100 for src in request.user.profile.sources.all()):
         return render(request, 'permission_denied.html')
 
     solution_content = open(os.path.join(settings.APP_DIR, 'problems', str(id), 'solution.cpp'), 'r').read()
@@ -178,7 +175,7 @@ def problem_submissions(request, id = 0):
     if request.user.is_anonymous:
         return HttpResponseRedirect(reverse('login'))
     else:
-        documents = [(pb, pb.problemobj.difficulty) for pb in request.user.profile.sent_sources.all() if pb.problemobj.number == id][::-1]
+        documents = [(pb, pb.problemobj.difficulty) for pb in request.user.profile.sources.all() if pb.problemobj.number == id][::-1]
 
     return render(request, 'problem_submissions.html', {'documents': documents})
 
